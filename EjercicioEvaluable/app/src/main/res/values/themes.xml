@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
     <style name="Base.Theme.MyApplication" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Fuente básica del sistema -->
+        <item name="android:fontFamily">sans-serif-light</item>
+
+        <!-- Tamaño de texto más pequeño -->
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />

@@ -84,6 +84,20 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.746" />
+
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="40dp"
+                        android:layout_height="52dp"
+                        android:rotation="90"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.481"
+                        app:srcCompat="@drawable/pngegg" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -96,6 +110,19 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="89dp">
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="40dp"
+                        android:layout_height="52dp"
+                        android:rotation="90"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.481"
+                        app:srcCompat="@drawable/pngegg" />
 
                     <ImageView
                         android:id="@+id/imageView42"
@@ -151,6 +178,19 @@
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="40dp"
+                        android:layout_height="52dp"
+                        android:rotation="90"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.481"
+                        app:srcCompat="@drawable/pngegg" />
+
+                    <ImageView
                         android:id="@+id/imageView32"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -201,6 +241,19 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/imageView10"
+                        android:layout_width="40dp"
+                        android:layout_height="52dp"
+                        android:rotation="90"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.481"
+                        app:srcCompat="@drawable/pngegg" />
 
                     <ImageView
                         android:id="@+id/imageView31"
@@ -254,6 +307,19 @@
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:id="@+id/imageView13"
+                        android:layout_width="40dp"
+                        android:layout_height="52dp"
+                        android:rotation="90"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.481"
+                        app:srcCompat="@drawable/pngegg" />
+
+                    <ImageView
                         android:id="@+id/imageView33"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -305,6 +371,19 @@
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="40dp"
+                        android:layout_height="52dp"
+                        android:rotation="90"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.481"
+                        app:srcCompat="@drawable/pngegg" />
+
+                    <ImageView
                         android:id="@+id/imageView77"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
@@ -354,6 +433,19 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="79dp">
+
+                    <ImageView
+                        android:id="@+id/imageView14"
+                        android:layout_width="40dp"
+                        android:layout_height="52dp"
+                        android:rotation="90"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.956"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.481"
+                        app:srcCompat="@drawable/pngegg" />
 
                     <ImageView
                         android:id="@+id/imageView35"

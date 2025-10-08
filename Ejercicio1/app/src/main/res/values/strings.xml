@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Ejercicio1</string>
+    <string name="email">Email</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="BotonAcceso">Iniciar sesion</string>
+    <string name="colorFondoGris">#CDDC39</string>
+
+
+
+</resources>

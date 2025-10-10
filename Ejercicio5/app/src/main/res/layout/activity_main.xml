@@ -4,15 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEB3B"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.171" />
+
+    <Button
+        android:id="@+id/button_aumentar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aumentar"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="282dp" />
+
+    <Button
+        android:id="@+id/button_disminuir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Disminuir"
+        tools:layout_editor_absoluteX="240dp"
+        tools:layout_editor_absoluteY="282dp" />
+
+    <Button
+        android:id="@+id/button_fondo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fondo"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="417dp" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="247dp"
+        tools:layout_editor_absoluteY="417dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

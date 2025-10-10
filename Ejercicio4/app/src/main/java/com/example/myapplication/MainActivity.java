@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); //lo asocia a java con la interfaz
 
         // Asocia los objetos con los elementos del layout
         contadorTextView = findViewById(R.id.textView_numero);

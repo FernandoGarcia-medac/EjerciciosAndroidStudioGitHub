@@ -2,9 +2,18 @@
     <string name="app_name">My Application</string>
 
     <string name="titulo_PlayList">MyPlayList#1</string>
-
     <string name="nombre_usuario">Ferr</string>
-
     <string name="tiempo_playlist">2h26min</string>
 
+    <string name="cancion_1_titulo">Cangrinaje</string>
+    <string name="cancion_1_artista">Cruz Cafuné</string>
+
+    <string name="cancion_2_titulo">Wasted</string>
+    <string name="cancion_2_artista">Juice WRLD</string>
+
+    <string name="cancion_3_titulo">One Million Dollar Baby</string>
+    <string name="cancion_3_artista">Duki</string>
+
+    <string name="cancion_4_titulo">Cascada</string>
+    <string name="cancion_4_artista">Duki</string>
 </resources>

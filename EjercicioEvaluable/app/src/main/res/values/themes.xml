@@ -3,8 +3,8 @@
 
         <!-- Fuente básica de spotifyy -->
         <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
 
-        <!-- Tamaño de texto más pequeño -->
         <item name="android:textSize">12sp</item>
     </style>
 

@@ -19,20 +19,19 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    // ✅ Declaramos las variables que usaremos
     private TextView textoSaludo;
     private Button botonAumentar, botonDisminuir, botonFondo, botonToast;
     private LinearLayout layoutPrincipal;
 
-    private float tamañoTexto = 24f;  // Tamaño inicial del texto
-    private int colorActual = 0;      // Para alternar los colores de fondo
+    private float tamañoTexto = 24f;  //tamaño inicial del texto
+    private int colorActual = 0;      //para alternar los colores de fondo
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // ✅ Enlazamos los elementos del layout (activity_main.xml)
+        //Enlazamos
         textoSaludo = findViewById(R.id.textView_saludo);
         botonAumentar = findViewById(R.id.button_aumentar);
         botonDisminuir = findViewById(R.id.button_disminuir);
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         botonToast = findViewById(R.id.button4);
         layoutPrincipal = findViewById(R.id.layoutPrincipal);
 
-        // ✅ Botón para aumentar el tamaño del texto
+        //Botón para aumentar el tamaño del texto
         botonAumentar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,22 +48,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // ✅ Botón para disminuir el tamaño del texto
+        //disminuir el tamaño del texto
         botonDisminuir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tamañoTexto > 8f) { // Evita que el texto sea demasiado pequeño
+                if (tamañoTexto > 8f) {
                     tamañoTexto -= 4f;
                     textoSaludo.setTextSize(tamañoTexto);
                 }
             }
         });
 
-        // ✅ Botón para cambiar el color del fondo (va rotando entre varios colores)
+        //Botón para cambiar el color del fondo (va rotando entre varios colores)
         botonFondo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                colorActual = (colorActual + 1) % 4; // Cambia entre 4 colores
+                colorActual = (colorActual + 1) % 4; //Cambia entre 4 colores
                 switch (colorActual) {
                     case 0:
                         layoutPrincipal.setBackgroundColor(Color.WHITE);
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // ✅ Botón para mostrar el saludo en un Toast (mensaje flotante)
+        //Botón para mostrar el saludo en un Toast
         botonToast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

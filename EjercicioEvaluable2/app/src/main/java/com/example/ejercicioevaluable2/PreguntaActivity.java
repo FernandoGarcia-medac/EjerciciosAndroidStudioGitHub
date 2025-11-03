@@ -1,7 +1,7 @@
 package com.example.ejercicioevaluable2;
 
 
-public class Pregunta {
+public class PreguntaActivity {
 
     private String texto_pregunta;
     private String respuesta_correcta;
@@ -9,7 +9,7 @@ public class Pregunta {
     private String respuesta_incorrecta_2;
 
     // Constructor
-    public Pregunta(String texto_pregunta, String respuesta_correcta, String respuesta_incorrecta_1, String respuesta_incorrecta_2) {
+    public PreguntaActivity(String texto_pregunta, String respuesta_correcta, String respuesta_incorrecta_1, String respuesta_incorrecta_2) {
         this.texto_pregunta = texto_pregunta;
         this.respuesta_correcta = respuesta_correcta;
         this.respuesta_incorrecta_1 = respuesta_incorrecta_1;

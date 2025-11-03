@@ -33,8 +33,8 @@
 
     <EditText
         android:id="@+id/et_nombre_usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="291dp"
+        android:layout_height="65dp"
         android:ems="10"
         android:hint="Introduce tu nombre"
         android:inputType="text"
@@ -46,10 +46,13 @@
         app:layout_constraintVertical_bias="0.677" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_comenzar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="547dp" />
+        android:text="Comenzar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.805" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,9 +21,9 @@ public class FinalActivity extends AppCompatActivity {
 
     private DBHelper dbHelper;
 
-    // Constantes mínimas para el paso de datos (las metemos aquí para no crear la clase Constantes)
-    private static final String EXTRA_NOMBRE_USUARIO = "EXTRA_NOMBRE_USUARIO";
-    private static final String EXTRA_PUNTUACION_ACTUAL = "EXTRA_PUNTUACION_ACTUAL";
+    // Constantes para recibir datos del Intent
+    public static final String EXTRA_NOMBRE_USUARIO = "EXTRA_NOMBRE_USUARIO";
+    public static final String EXTRA_PUNTUACION_ACTUAL = "EXTRA_PUNTUACION_ACTUAL";
     private static final int NOTA_APROBADO = 5;
     private static final int RANKING_LIMIT = 5;
 
@@ -31,6 +32,7 @@ public class FinalActivity extends AppCompatActivity {
     private TextView tvNotaObtenida;
     private ImageView ivResultadoImagen;
     private LinearLayout llRankingContenedor;
+    private Button btnReiniciarQuiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,81 +42,88 @@ public class FinalActivity extends AppCompatActivity {
         // Inicializar la base de datos
         dbHelper = new DBHelper(this);
 
-        // Inicializar componentes UI
+        // Referencias UI
         tvMensajeFinal = findViewById(R.id.tv_mensaje_final);
         tvNotaObtenida = findViewById(R.id.tv_nota_obtenida);
         ivResultadoImagen = findViewById(R.id.iv_resultado_imagen);
         llRankingContenedor = findViewById(R.id.ll_ranking_contenedor);
+        btnReiniciarQuiz = findViewById(R.id.btn_reiniciar_quiz);
 
-        // 1. Obtener datos del Intent
+        // Obtener datos del Intent
         Intent intent = getIntent();
         String nombreUsuario = intent.getStringExtra(EXTRA_NOMBRE_USUARIO);
         int puntuacionFinal = intent.getIntExtra(EXTRA_PUNTUACION_ACTUAL, 0);
 
-        if (nombreUsuario == null) {
+        if (nombreUsuario == null || nombreUsuario.trim().isEmpty()) {
             nombreUsuario = "Jugador Anónimo";
         }
 
-        // 2. Mostrar el resultado y aplicar el Requisito Extra (aprobado/suspenso)
+        // Mostrar resultado
         mostrarResultado(nombreUsuario, puntuacionFinal);
 
-        // 3. Guardar el resultado en la base de datos
+        // Guardar puntuación
         dbHelper.guardarResultado(nombreUsuario, puntuacionFinal);
 
-        // 4. Cargar y mostrar el ranking
+        // Mostrar ranking
         mostrarRanking();
+
+        // Botón reiniciar quiz
+        btnReiniciarQuiz.setOnClickListener(v -> {
+            Intent i = new Intent(FinalActivity.this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            finish();
+        });
     }
 
     /**
-     * Muestra la nota, el mensaje y la imagen dependiendo de si el jugador aprueba o suspende.
+     * Muestra el mensaje e imagen de aprobado/suspenso.
      */
     private void mostrarResultado(String nombre, int puntuacion) {
         tvNotaObtenida.setText(String.format("Nota Final: %d/10", puntuacion));
 
         if (puntuacion >= NOTA_APROBADO) {
-            // Aprobado (Requisito Extra: Color verde, mensaje positivo, imagen de éxito)
             tvMensajeFinal.setText(String.format("¡Felicidades, %s! Has APROBADO.", nombre));
-            ivResultadoImagen.setImageResource(R.drawable.aprobado); // Debes tener un drawable 'aprobado.png' o similar
-            tvMensajeFinal.setTextColor(ContextCompat.getColor(this, R.color.colorAprobado)); // Define colorAprobado en colors.xml
+            ivResultadoImagen.setImageResource(R.drawable.aprobado); // Imagen de aprobado
+            tvMensajeFinal.setTextColor(ContextCompat.getColor(this, R.color.colorAprobado));
         } else {
-            // Suspenso (Requisito Extra: Color rojo, mensaje negativo, imagen de fallo)
             tvMensajeFinal.setText(String.format("Lo siento, %s. Has SUSPENDIDO.", nombre));
-            ivResultadoImagen.setImageResource(R.drawable.suspenso); // Debes tener un drawable 'suspenso.png' o similar
-            tvMensajeFinal.setTextColor(ContextCompat.getColor(this, R.color.colorSuspenso)); // Define colorSuspenso en colors.xml
+            ivResultadoImagen.setImageResource(R.drawable.suspenso); // Imagen de suspenso
+            tvMensajeFinal.setTextColor(ContextCompat.getColor(this, R.color.colorSuspenso));
         }
     }
 
     /**
-     * Obtiene el ranking de la BBDD y lo pinta en el LinearLayout.
+     * Carga el ranking desde la base de datos.
      */
     private void mostrarRanking() {
-        // Limpiar vistas anteriores
         llRankingContenedor.removeAllViews();
 
-        // Título del Ranking
-        TextView tvTituloRanking = new TextView(this);
-        tvTituloRanking.setText("TOP 5 JUGADORES");
-        tvTituloRanking.setTextSize(20);
-        tvTituloRanking.setGravity(Gravity.CENTER);
-        llRankingContenedor.addView(tvTituloRanking);
+        TextView titulo = new TextView(this);
+        titulo.setText("🏆 TOP 5 JUGADORES 🏆");
+        titulo.setTextSize(20);
+        titulo.setTextColor(ContextCompat.getColor(this, android.R.color.white));
+        titulo.setGravity(Gravity.CENTER);
+        llRankingContenedor.addView(titulo);
 
-        // Obtener la lista del DBHelper
         List<DBHelper.RankingEntry> ranking = dbHelper.obtenerRanking(RANKING_LIMIT);
 
-        if (ranking.isEmpty()) {
+        if (ranking == null || ranking.isEmpty()) {
             TextView tvNoData = new TextView(this);
             tvNoData.setText("Aún no hay resultados en el ranking.");
+            tvNoData.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray));
             tvNoData.setGravity(Gravity.CENTER);
             llRankingContenedor.addView(tvNoData);
             return;
         }
 
-        // Mostrar cada entrada del ranking
         int posicion = 1;
         for (DBHelper.RankingEntry entry : ranking) {
             TextView tvEntry = new TextView(this);
-            tvEntry.setText(String.format("%d. %s - %d/10", posicion++, entry.nombre, entry.puntuacion));
+            tvEntry.setText(String.format("%d. %s — %d/10", posicion++, entry.nombre, entry.puntuacion));
+            tvEntry.setTextColor(ContextCompat.getColor(this, android.R.color.white));
             tvEntry.setTextSize(18);
+            tvEntry.setGravity(Gravity.CENTER_HORIZONTAL);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,

@@ -54,10 +54,10 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <RadioGroup
         android:id="@+id/ll_respuestas"
         android:layout_width="347dp"
-        android:layout_height="304dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,29 +66,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.81">
 
-        <RadioGroup
+
+        <RadioButton
+            android:id="@+id/btn_respuesta_1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="100dp"
+            android:text="Estadio de La Cartuja" />
 
-            <RadioButton
-                android:id="@+id/btn_respuesta_1"
-                android:layout_width="match_parent"
-                android:androidlayout_height="100dp"
-                android:text="Estadio de La Cartuja"  android:layout_height="100dp"/>
+        <RadioButton
+            android:id="@+id/btn_respuesta_2"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:text="Mestalla" />
 
-            <RadioButton
-                android:id="@+id/btn_respuesta_2"
-                android:layout_width="match_parent"
-                android:layout_height="96dp"
-                android:text="Mestalla" />
+        <RadioButton
+            android:id="@+id/btn_respuesta_3"
+            android:layout_width="match_parent"
+            android:layout_height="111dp"
+            android:text="Wanda Metropolitano" />
+    </RadioGroup>
 
-            <RadioButton
-                android:id="@+id/btn_respuesta_3"
-                android:layout_width="match_parent"
-                android:layout_height="111dp"
-                android:text="Wanda Metropolitano" />
-        </RadioGroup>
-    </LinearLayout>
 
     <Button
         android:id="@+id/btn_siguiente"

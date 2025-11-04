@@ -13,7 +13,19 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
-            android:name=".PreguntaActivity"
+            android:name=".Pregunta5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Pregunta1Activity"
             android:exported="false" />
         <activity
             android:name=".Pregunta"

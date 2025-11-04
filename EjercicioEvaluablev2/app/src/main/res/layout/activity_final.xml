@@ -1,117 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="@android:color/white"
+    android:background="#0D1117"
+    android:padding="16dp"
     tools:context=".FinalActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="32dp">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-        <!-- Imagen de Resultado (Para requisito Extra: cambia según aprobado/suspenso) -->
-        <ImageView
-            android:id="@+id/iv_resultado_imagen"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/trofeo"
-            android:contentDescription="Imagen de resultado del Quiz"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="32dp"/>
-
-        <!-- Mensaje de Enhorabuena / Frustración Personalizado (tv_mensaje_final) -->
-        <TextView
-            android:id="@+id/tv_mensaje_final"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:text="¡IMPRESIONANTE, USUARIO! Quiz Finalizado."
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_resultado_imagen" />
-
-        <!-- Nota Obtenida (tv_nota_obtenida) -->
-        <TextView
-            android:id="@+id/tv_nota_obtenida"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="Nota: 10 / 10"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:textColor="@color/green_success"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_mensaje_final" />
-
-        <!-- Separador -->
-        <View
-            android:id="@+id/divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="24dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/tv_nota_obtenida"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Título Ranking -->
-        <TextView
-            android:id="@+id/tv_titulo_ranking"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="⚽ TOP RANKING HISTÓRICO ⚽"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider" />
-
-        <!-- Contenedor del Ranking (ll_ranking_contenedor) - Se rellena dinámicamente -->
+        <!-- CABECERA CON TROFEO Y TÍTULO -->
         <LinearLayout
-            android:id="@+id/ll_ranking_contenedor"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="16dp"
-            android:paddingHorizontal="16dp"
-            android:paddingBottom="16dp"
-            android:background="@drawable/rounded_background_light"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_titulo_ranking" />
+            android:gravity="center"
+            android:padding="16dp">
 
-        <!-- Botón Reiniciar -->
+            <ImageView
+                android:id="@+id/iv_resultado_imagen"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/trofeo"
+                android:contentDescription="Resultado del quiz"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tv_mensaje_final"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¡Increíble, jugador!"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:textSize="26sp"
+                android:gravity="center"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tv_nota_obtenida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nota: 10 / 10"
+                android:textColor="#4CAF50"
+                android:textSize="38sp"
+                android:textStyle="bold"
+                android:shadowColor="#202020"
+                android:shadowRadius="8"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- SEPARADOR VISUAL -->
+        <View
+            android:layout_width="80dp"
+            android:layout_height="3dp"
+            android:layout_marginVertical="20dp"
+            android:background="#FFFFFF" />
+
+        <!-- TARJETA DEL RANKING -->
+        <LinearLayout
+            android:id="@+id/card_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card_dark"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_marginVertical="8dp">
+
+            <TextView
+                android:id="@+id/tv_titulo_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🏆 TOP 5 HISTÓRICO 🏆"
+                android:textColor="#FFD700"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_ranking_contenedor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+        <!-- BOTÓN FINAL -->
         <Button
             android:id="@+id/btn_reiniciar_quiz"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Volver a Jugar"
-            android:backgroundTint="@color/colorAccent"
-            android:textColor="@android:color/white"
+            android:text="🔁 Volver a jugar"
             android:textStyle="bold"
-            android:paddingVertical="12dp"
-            app:cornerRadius="8dp"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#1E88E5"
             android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_ranking_contenedor"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginBottom="24dp"
+            android:paddingVertical="12dp"
+            app:cornerRadius="12dp" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>

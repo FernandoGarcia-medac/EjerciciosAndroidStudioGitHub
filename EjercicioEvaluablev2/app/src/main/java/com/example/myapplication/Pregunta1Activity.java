@@ -1,9 +1,9 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +38,7 @@ public class Pregunta1Activity extends AppCompatActivity {
 
         if (getIntent().hasExtra(EXTRA_NOMBRE_USUARIO)) {
             nombreUsuario = getIntent().getStringExtra(EXTRA_NOMBRE_USUARIO);
+            puntuacionActual = getIntent().getIntExtra(EXTRA_PUNTUACION, 0);
         }
 
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +57,11 @@ public class Pregunta1Activity extends AppCompatActivity {
 
                 if (respuestaElegida.equals(RESPUESTA_CORRECTA)) {
                     puntuacionActual += 1;
+                    playSound(R.raw.acierto);
+                    Toast.makeText(Pregunta1Activity.this, "¡CORRECTO! +1 punto.", Toast.LENGTH_SHORT).show();
+                } else {
+                    playSound(R.raw.mal);
+                    Toast.makeText(Pregunta1Activity.this, "INCORRECTO.", Toast.LENGTH_LONG).show();
                 }
 
                 Intent intent = new Intent(Pregunta1Activity.this, Pregunta2Activity.class);
@@ -66,5 +72,11 @@ public class Pregunta1Activity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void playSound(int resourceId) {
+        MediaPlayer mp = MediaPlayer.create(this, resourceId);
+        mp.start();
+        mp.setOnCompletionListener(MediaPlayer::release);
     }
 }

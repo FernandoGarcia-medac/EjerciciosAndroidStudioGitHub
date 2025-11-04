@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.RadioGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 public class Pregunta5Activity extends AppCompatActivity {
 
@@ -60,6 +61,11 @@ public class Pregunta5Activity extends AppCompatActivity {
 
                 if (respuestaElegida.equals(RESPUESTA_CORRECTA)) {
                     puntuacionRecibida += 1;
+                    playSound(R.raw.acierto);
+                    Toast.makeText(Pregunta5Activity.this, "¡CORRECTO! +1 punto.", Toast.LENGTH_SHORT).show();
+                } else {
+                    playSound(R.raw.mal);
+                    Toast.makeText(Pregunta5Activity.this, "INCORRECTO.", Toast.LENGTH_LONG).show();
                 }
 
                 int notaFinal = puntuacionRecibida * 2;
@@ -73,5 +79,11 @@ public class Pregunta5Activity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void playSound(int resourceId) {
+        MediaPlayer mp = MediaPlayer.create(this, resourceId);
+        mp.start();
+        mp.setOnCompletionListener(MediaPlayer::release);
     }
 }

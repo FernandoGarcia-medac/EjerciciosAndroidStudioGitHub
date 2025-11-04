@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,15 +26,16 @@ public class Pregunta4Activity extends AppCompatActivity {
     public static final String EXTRA_NOMBRE_USUARIO = "EXTRA_NOMBRE_USUARIO";
     public static final String EXTRA_PUNTUACION = "EXTRA_PUNTUACION";
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pregunta);
+        setContentView(R.layout.activity_pregunta4);
 
         btnSiguiente = findViewById(R.id.btn_siguiente);
         tvProgreso = findViewById(R.id.tv_progreso);
         tvPregunta = findViewById(R.id.tv_pregunta);
-
+        rgRespuestas = findViewById(R.id.radioGroup_vertical);
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_NOMBRE_USUARIO) && intent.hasExtra(EXTRA_PUNTUACION)) {
             nombreUsuario = intent.getStringExtra(EXTRA_NOMBRE_USUARIO);
@@ -40,8 +43,6 @@ public class Pregunta4Activity extends AppCompatActivity {
         }
 
         tvProgreso.setText("Pregunta 4/5");
-        tvPregunta.setText("¿Qué jugador ha ganado más Ligas españolas en toda la historia?");
-
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

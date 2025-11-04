@@ -1,138 +1,197 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.json.JSONException;
+import org.json.JSONObject; // Importamos JSONObject
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
-import java.util.List;
-
-/**
- * Muestra el resultado final del quiz, guarda la puntuación en la base de datos
- * y muestra el ranking de los mejores jugadores.
- */
 public class FinalActivity extends AppCompatActivity {
 
-    private DBHelper dbHelper;
-
-    // Constantes para recibir datos del Intent
-    public static final String EXTRA_NOMBRE_USUARIO = "EXTRA_NOMBRE_USUARIO";
-    public static final String EXTRA_PUNTUACION_ACTUAL = "EXTRA_PUNTUACION_ACTUAL";
-    private static final int NOTA_APROBADO = 5;
-    private static final int RANKING_LIMIT = 5;
-
-    // Componentes UI
-    private TextView tvMensajeFinal;
-    private TextView tvNotaObtenida;
-    private ImageView ivResultadoImagen;
+    private TextView tvResultado;
+    private TextView tvNotaFinal;
+    private ImageView ivResultado;
+    private Button btnVolver;
     private LinearLayout llRankingContenedor;
-    private Button btnReiniciarQuiz;
+
+    public static final String EXTRA_NOMBRE_USUARIO = "EXTRA_NOMBRE_USUARIO";
+    public static final String EXTRA_PUNTUACION = "EXTRA_PUNTUACION";
+
+    private static final String PREFS_NAME = "QuizPrefs";
+    private static final String KEY_RANKING = "RankingList";
+
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final);
 
-        // Inicializar la base de datos
-        dbHelper = new DBHelper(this);
-
-        // Referencias UI
-        tvMensajeFinal = findViewById(R.id.tv_mensaje_final);
-        tvNotaObtenida = findViewById(R.id.tv_nota_obtenida);
-        ivResultadoImagen = findViewById(R.id.iv_resultado_imagen);
+        // 1. Enlazar vistas
+        tvResultado = findViewById(R.id.tv_mensaje);
+        tvNotaFinal = findViewById(R.id.tv_puntuacion);
+        ivResultado = findViewById(R.id.iv_resultado);
+        btnVolver = findViewById(R.id.btn_volver_quiz);
         llRankingContenedor = findViewById(R.id.ll_ranking_contenedor);
-        btnReiniciarQuiz = findViewById(R.id.btn_reiniciar_quiz);
 
-        // Obtener datos del Intent
+        // 2. Recibir datos
         Intent intent = getIntent();
-        String nombreUsuario = intent.getStringExtra(EXTRA_NOMBRE_USUARIO);
-        int puntuacionFinal = intent.getIntExtra(EXTRA_PUNTUACION_ACTUAL, 0);
+        String nombreUsuario = "Fer";
+        int notaFinal = 0;
 
-        if (nombreUsuario == null || nombreUsuario.trim().isEmpty()) {
-            nombreUsuario = "Jugador Anónimo";
+        if (intent.hasExtra(EXTRA_NOMBRE_USUARIO)) {
+            nombreUsuario = intent.getStringExtra(EXTRA_NOMBRE_USUARIO);
+        }
+        if (intent.hasExtra(EXTRA_PUNTUACION)) {
+            notaFinal = intent.getIntExtra(EXTRA_PUNTUACION, 0);
         }
 
-        // Mostrar resultado
-        mostrarResultado(nombreUsuario, puntuacionFinal);
+        // 3. Guardar el nuevo resultado y mostrar el ranking
+        guardarResultado(nombreUsuario, notaFinal);
+        mostrarRanking(nombreUsuario); // Pasamos el nombre para que te resalte
 
-        // Guardar puntuación
-        dbHelper.guardarResultado(nombreUsuario, puntuacionFinal);
+        // 4. Actualizar el resultado visual (Aprobado/Suspenso)
+        if (notaFinal >= 5) {
+            tvResultado.setText("¡Felicidades, " + nombreUsuario + "! ¡APROBADO!");
+            ivResultado.setImageResource(R.drawable.aprobado);
+            tvNotaFinal.setText("Nota Final: " + notaFinal + " / 10");
+            tvNotaFinal.setTextColor(Color.parseColor("#4CAF50"));
+        } else {
+            tvResultado.setText("Lo siento, " + nombreUsuario + ". Has SUSPENDIDO.");
+            ivResultado.setImageResource(R.drawable.caca);
+            tvNotaFinal.setText("Nota Final: " + notaFinal + " / 10");
+            tvNotaFinal.setTextColor(Color.parseColor("#F44336"));
+        }
 
-        // Mostrar ranking
-        mostrarRanking();
-
-        // Botón reiniciar quiz
-        btnReiniciarQuiz.setOnClickListener(v -> {
-            Intent i = new Intent(FinalActivity.this, MainActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(i);
+        // 5. Botón Volver
+        btnVolver.setOnClickListener(v -> {
+            Intent mainIntent = new Intent(FinalActivity.this, MainActivity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(mainIntent);
             finish();
         });
     }
 
     /**
-     * Muestra el mensaje e imagen de aprobado/suspenso.
+     * Guarda el resultado actual como JSON String en SharedPreferences.
      */
-    private void mostrarResultado(String nombre, int puntuacion) {
-        tvNotaObtenida.setText(String.format("Nota Final: %d/10", puntuacion));
+    private void guardarResultado(String nombre, int puntuacion) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String jsonRanking = prefs.getString(KEY_RANKING, null);
 
-        if (puntuacion >= NOTA_APROBADO) {
-            tvMensajeFinal.setText(String.format("¡Felicidades, %s! Has APROBADO.", nombre));
-            ivResultadoImagen.setImageResource(R.drawable.aprobado); // Imagen de aprobado
-            tvMensajeFinal.setTextColor(ContextCompat.getColor(this, R.color.colorAprobado));
+        ArrayList<String> ranking;
+        if (jsonRanking == null) {
+            ranking = new ArrayList<>();
         } else {
-            tvMensajeFinal.setText(String.format("Lo siento, %s. Has SUSPENDIDO.", nombre));
-            ivResultadoImagen.setImageResource(R.drawable.suspenso); // Imagen de suspenso
-            tvMensajeFinal.setTextColor(ContextCompat.getColor(this, R.color.colorSuspenso));
+            // Deserializa la lista de JSON Strings
+            Type type = new TypeToken<ArrayList<String>>() {}.getType();
+            ranking = gson.fromJson(jsonRanking, type);
         }
-    }
 
-    /**
-     * Carga el ranking desde la base de datos.
-     */
-    private void mostrarRanking() {
-        llRankingContenedor.removeAllViews();
-
-        TextView titulo = new TextView(this);
-        titulo.setText("🏆 TOP 5 JUGADORES 🏆");
-        titulo.setTextSize(20);
-        titulo.setTextColor(ContextCompat.getColor(this, android.R.color.white));
-        titulo.setGravity(Gravity.CENTER);
-        llRankingContenedor.addView(titulo);
-
-        List<DBHelper.RankingEntry> ranking = dbHelper.obtenerRanking(RANKING_LIMIT);
-
-        if (ranking == null || ranking.isEmpty()) {
-            TextView tvNoData = new TextView(this);
-            tvNoData.setText("Aún no hay resultados en el ranking.");
-            tvNoData.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray));
-            tvNoData.setGravity(Gravity.CENTER);
-            llRankingContenedor.addView(tvNoData);
+        // Crear el nuevo resultado como JSON String
+        JSONObject nuevoResultado = new JSONObject();
+        try {
+            nuevoResultado.put("nombre", nombre);
+            nuevoResultado.put("puntuacion", puntuacion);
+        } catch (JSONException e) {
+            e.printStackTrace();
             return;
         }
 
-        int posicion = 1;
-        for (DBHelper.RankingEntry entry : ranking) {
-            TextView tvEntry = new TextView(this);
-            tvEntry.setText(String.format("%d. %s — %d/10", posicion++, entry.nombre, entry.puntuacion));
-            tvEntry.setTextColor(ContextCompat.getColor(this, android.R.color.white));
-            tvEntry.setTextSize(18);
-            tvEntry.setGravity(Gravity.CENTER_HORIZONTAL);
+        // Añade el nuevo resultado
+        ranking.add(nuevoResultado.toString());
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            );
-            params.setMargins(0, 8, 0, 8);
-            tvEntry.setLayoutParams(params);
+        // Ordenar la lista (comparando las puntuaciones dentro de cada JSON String)
+        Collections.sort(ranking, new Comparator<String>() {
+            @Override
+            public int compare(String r1, String r2) {
+                try {
+                    int p1 = new JSONObject(r1).getInt("puntuacion");
+                    int p2 = new JSONObject(r2).getInt("puntuacion");
+                    // Orden descendente (de mayor a menor)
+                    return Integer.compare(p2, p1);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return 0;
+                }
+            }
+        });
 
-            llRankingContenedor.addView(tvEntry);
+        // Limita la lista al Top 10
+        if (ranking.size() > 10) {
+            ranking = new ArrayList<>(ranking.subList(0, 10));
+        }
+
+        // Serializa la lista actualizada y guárdala
+        String updatedJson = gson.toJson(ranking);
+        prefs.edit().putString(KEY_RANKING, updatedJson).apply();
+    }
+
+    /**
+     * Muestra el ranking Top 5 en el LinearLayout.
+     */
+    private void mostrarRanking(String nombreJugadorActual) {
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        String jsonRanking = prefs.getString(KEY_RANKING, null);
+
+        if (jsonRanking == null) return;
+
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        ArrayList<String> rankingStrings = gson.fromJson(jsonRanking, type);
+
+        llRankingContenedor.removeAllViews(); // Limpiar vistas
+
+        int topCount = 0;
+        for (String resultadoString : rankingStrings) {
+            if (topCount >= 5) break;
+
+            try {
+                JSONObject resultado = new JSONObject(resultadoString);
+                String nombre = resultado.getString("nombre");
+                int puntuacion = resultado.getInt("puntuacion");
+
+                // Crear un TextView para la entrada
+                TextView tvEntry = new TextView(this);
+
+                // Formatear el texto
+                String texto = (topCount + 1) + ". " + nombre + " - " + puntuacion + "/10";
+                tvEntry.setText(texto);
+
+                tvEntry.setTextSize(18);
+                tvEntry.setTextColor(Color.WHITE);
+                tvEntry.setPadding(0, 8, 0, 8);
+
+                // Resaltar el primer puesto (Campeón)
+                if (topCount == 0) {
+                    tvEntry.setTextColor(Color.parseColor("#FFD700")); // Oro
+                    tvEntry.setTypeface(null, Typeface.BOLD);
+                    tvEntry.setTextSize(20);
+                }
+                // Resaltar tu entrada actual
+                else if (nombre.equals(nombreJugadorActual) && puntuacion == resultado.getInt("puntuacion")) {
+                    tvEntry.setTextColor(Color.parseColor("#1E88E5")); // Azul, destacando al jugador
+                    tvEntry.setTypeface(null, Typeface.BOLD);
+                }
+
+                llRankingContenedor.addView(tvEntry);
+                topCount++;
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

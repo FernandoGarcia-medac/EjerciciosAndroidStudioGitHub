@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,17 +26,16 @@ public class Pregunta3Activity extends AppCompatActivity {
     public static final String EXTRA_NOMBRE_USUARIO = "EXTRA_NOMBRE_USUARIO";
     public static final String EXTRA_PUNTUACION = "EXTRA_PUNTUACION";
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pregunta);
+        setContentView(R.layout.activity_pregunta3);
 
-        // 1. Enlazar vistas
         btnSiguiente = findViewById(R.id.btn_siguiente);
         tvProgreso = findViewById(R.id.tv_progreso);
         tvPregunta = findViewById(R.id.tv_pregunta);
-
-        // 2. Recibir datos de Pregunta2Activity
+        rgRespuestas = findViewById(R.id.radioGroup_vertical);
         Intent intent = getIntent();
         if (intent.hasExtra(EXTRA_NOMBRE_USUARIO) && intent.hasExtra(EXTRA_PUNTUACION)) {
             nombreUsuario = intent.getStringExtra(EXTRA_NOMBRE_USUARIO);
@@ -42,7 +43,6 @@ public class Pregunta3Activity extends AppCompatActivity {
         }
 
         tvProgreso.setText("Pregunta 3/5");
-        tvPregunta.setText("¿Cuál fue el primer equipo andaluz en ganar la Liga?");
 
         btnSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +58,6 @@ public class Pregunta3Activity extends AppCompatActivity {
 
                 if (respuestaElegida.equals(RESPUESTA_CORRECTA)) {
                     puntuacionRecibida += 1;
-                } else {
                 }
 
                 Intent intentSiguiente = new Intent(Pregunta3Activity.this, Pregunta4Activity.class);

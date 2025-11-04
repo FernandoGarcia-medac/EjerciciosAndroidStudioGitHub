@@ -68,8 +68,9 @@
         app:layout_constraintVertical_bias="0.81">
 
         <RadioGroup
+            android:id="@+id/radioGroup_vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <RadioButton
                 android:id="@+id/btn_respuesta_1"

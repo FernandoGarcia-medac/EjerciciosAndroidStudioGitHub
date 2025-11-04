@@ -9,7 +9,8 @@
         android:id="@+id/tv_progreso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pregunta 5/5" android:textSize="16sp"
+        android:text="Pregunta 5/5"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +35,8 @@
             android:layout_width="154dp"
             android:layout_height="64dp"
             android:gravity="center"
-            android:text="¿En qué estadio se jugó la final de la Copa del Rey 2023?" android:textColor="#000000"
+            android:text="¿En qué estadio se jugó la final de la Copa del Rey 2023?"
+            android:textColor="#000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,16 +50,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_pregunta"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.841"
             app:srcCompat="@drawable/cartuja" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RadioGroup
+    <LinearLayout
         android:id="@+id/ll_respuestas"
         android:layout_width="347dp"
-        android:layout_height="wrap_content"
+        android:layout_height="304dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,26 +68,30 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.81">
 
-
-        <RadioButton
-            android:id="@+id/btn_respuesta_1"
+        <RadioGroup
+            android:id="@+id/radioGroup_vertical"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:text="Estadio de La Cartuja" />
+            android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/btn_respuesta_2"
-            android:layout_width="match_parent"
-            android:layout_height="96dp"
-            android:text="Mestalla" />
+            <RadioButton
+                android:id="@+id/btn_respuesta_1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Estadio de La Cartuja" />
 
-        <RadioButton
-            android:id="@+id/btn_respuesta_3"
-            android:layout_width="match_parent"
-            android:layout_height="111dp"
-            android:text="Wanda Metropolitano" />
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/btn_respuesta_2"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:text="Mestalla" />
 
+            <RadioButton
+                android:id="@+id/btn_respuesta_3"
+                android:layout_width="match_parent"
+                android:layout_height="111dp"
+                android:text="Wanda Metropolitano" />
+        </RadioGroup>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_siguiente"

@@ -1,82 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".ResultadoActivity">
+    android:padding="24dp"
+    android:background="@android:color/white"
+    tools:context=".FinalActivity">
 
-    <TextView
-        android:id="@+id/tv_mensaje_final"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="¡Enhorabuena, [Nombre de Usuario]! Quiz Finalizado."
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/holo_green_dark"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp"
-        tools:text="¡Enhorabuena, Fer! Quiz Finalizado."/>
+        android:paddingBottom="32dp">
 
-    <TextView
-        android:id="@+id/tv_puntuacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tu nota: 10/10"
-        android:textSize="22sp"
-        android:textStyle="italic"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mensaje_final"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Tu nota: 8/10"/>
+        <!-- Imagen de Resultado (Para requisito Extra: cambia según aprobado/suspenso) -->
+        <ImageView
+            android:id="@+id/iv_resultado_imagen"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/trofeo"
+            android:contentDescription="Imagen de resultado del Quiz"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"/>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        android:layout_marginTop="32dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_puntuacion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintBottom_toTopOf="@+id/btn_reiniciar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp">
-
+        <!-- Mensaje de Enhorabuena / Frustración Personalizado (tv_mensaje_final) -->
         <TextView
-            android:id="@+id/tv_ranking"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_mensaje_final"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="--- TOP 5 JUGADORES ---\n\n1. Fer - 10/10\n2. Juan - 8/10\n3. Ana - 6/10"
-            android:textSize="18sp"
-            android:gravity="center_horizontal"
-            android:padding="8dp"
-            tools:text="--- TOP 5 JUGADORES ---\n\n1. Fer - 10/10\n2. Juan - 8/10\n3. Ana - 6/10\n4. Miguel - 6/10\n5. Elena - 4/10"
-            />
-    </ScrollView>
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="¡IMPRESIONANTE, USUARIO! Quiz Finalizado."
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_resultado_imagen" />
 
-    <Button
-        android:id="@+id/btn_reiniciar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Reiniciar Quiz"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="20dp"
-        style="@style/Widget.AppCompat.Button.Colored"
-        />
+        <!-- Nota Obtenida (tv_nota_obtenida) -->
+        <TextView
+            android:id="@+id/tv_nota_obtenida"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Nota: 10 / 10"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/green_success"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mensaje_final" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Separador -->
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@id/tv_nota_obtenida"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Título Ranking -->
+        <TextView
+            android:id="@+id/tv_titulo_ranking"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="⚽ TOP RANKING HISTÓRICO ⚽"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <!-- Contenedor del Ranking (ll_ranking_contenedor) - Se rellena dinámicamente -->
+        <LinearLayout
+            android:id="@+id/ll_ranking_contenedor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp"
+            android:background="@drawable/rounded_background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titulo_ranking" />
+
+        <!-- Botón Reiniciar -->
+        <Button
+            android:id="@+id/btn_reiniciar_quiz"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Volver a Jugar"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:paddingVertical="12dp"
+            app:cornerRadius="8dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_ranking_contenedor"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

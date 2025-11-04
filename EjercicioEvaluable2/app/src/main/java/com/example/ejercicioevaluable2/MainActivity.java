@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void iniciarQuiz(String nombre) {
         Intent intent = new Intent(MainActivity.this, PreguntaActivity.class);
-
         intent.putExtra("EXTRA_NOMBRE_USUARIO", nombre);
 
         startActivity(intent);

@@ -16,12 +16,6 @@
             android:name=".PreguntaActivity"
             android:exported="false" />
         <activity
-            android:name=".ResultadoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Pregunta"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

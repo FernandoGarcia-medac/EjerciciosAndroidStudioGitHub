@@ -8,6 +8,10 @@ public class PreguntaActivity {
     private String respuesta_incorrecta_1;
     private String respuesta_incorrecta_2;
 
+    public PreguntaActivity(){
+
+    }
+
     // Constructor
     public PreguntaActivity(String texto_pregunta, String respuesta_correcta, String respuesta_incorrecta_1, String respuesta_incorrecta_2) {
         this.texto_pregunta = texto_pregunta;

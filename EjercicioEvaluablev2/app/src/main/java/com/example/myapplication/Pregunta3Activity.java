@@ -60,10 +60,8 @@ public class Pregunta3Activity extends AppCompatActivity {
                 if (respuestaElegida.equals(RESPUESTA_CORRECTA)) {
                     puntuacionRecibida += 1;
                     playSound(R.raw.acierto);
-                    Toast.makeText(Pregunta3Activity.this, "¡CORRECTO! +1 punto.", Toast.LENGTH_SHORT).show();
                 } else {
                     playSound(R.raw.mal);
-                    Toast.makeText(Pregunta3Activity.this, "INCORRECTO.", Toast.LENGTH_LONG).show();
                 }
 
                 Intent intentSiguiente = new Intent(Pregunta3Activity.this, Pregunta4Activity.class);

@@ -58,10 +58,8 @@ public class Pregunta1Activity extends AppCompatActivity {
                 if (respuestaElegida.equals(RESPUESTA_CORRECTA)) {
                     puntuacionActual += 1;
                     playSound(R.raw.acierto);
-                    Toast.makeText(Pregunta1Activity.this, "¡CORRECTO! +1 punto.", Toast.LENGTH_SHORT).show();
                 } else {
                     playSound(R.raw.mal);
-                    Toast.makeText(Pregunta1Activity.this, "INCORRECTO.", Toast.LENGTH_LONG).show();
                 }
 
                 Intent intent = new Intent(Pregunta1Activity.this, Pregunta2Activity.class);

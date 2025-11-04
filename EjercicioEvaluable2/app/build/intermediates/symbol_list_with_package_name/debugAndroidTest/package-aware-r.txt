@@ -1,3 +1,0 @@
-com.example.ejercicioevaluable2.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme

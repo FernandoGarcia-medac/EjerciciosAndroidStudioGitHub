@@ -61,7 +61,7 @@ public class FinalActivity extends AppCompatActivity {
 
         if (notaFinal >= 5) {
             tvResultado.setText("¡Felicidades, " + nombreUsuario + "! ¡APROBADO!");
-            ivResultado.setImageResource(R.drawable.aprobado);
+            ivResultado.setImageResource(R.drawable.ok);
             tvNotaFinal.setText("Nota Final: " + notaFinal + " / 10");
             tvNotaFinal.setTextColor(Color.parseColor("#4CAF50"));
         } else {

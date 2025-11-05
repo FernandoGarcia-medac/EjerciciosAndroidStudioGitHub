@@ -13,7 +13,7 @@ import java.util.List;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "QuizRanking.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 9;
 
     private static final String TABLE_RANKING = "ranking";
     private static final String COL_ID = "id";
@@ -58,7 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long newRowId = db.insert(TABLE_RANKING, null, values);
         Log.d("DBHelper", "Resultado guardado con ID: " + newRowId);
 
-        db.close();
+        // db.close();
     }
 
 
@@ -94,7 +94,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         cursor.close();
-        db.close();
+        // db.close();
 
         return rankingList;
     }

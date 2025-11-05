@@ -33,12 +33,12 @@
                 android:id="@+id/tv_mensaje"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¡Increíble, jugador!"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:textSize="26sp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:layout_marginBottom="8dp" />
+                android:text="¡Bien hecho, jugador!"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_puntuacion"

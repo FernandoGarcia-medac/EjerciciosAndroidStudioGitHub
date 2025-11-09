@@ -52,6 +52,7 @@ public class Pregunta5Activity extends AppCompatActivity {
             public void onClick(View v) {
                 int selectedId = rgRespuestas.getCheckedRadioButtonId();
                 if (selectedId == -1) {
+                    Toast.makeText(Pregunta5Activity.this, "Selecciona una respuesta", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

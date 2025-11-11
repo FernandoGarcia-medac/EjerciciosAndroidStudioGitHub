@@ -2,7 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorAprobado">#4CAF50</color> <!-- Verde -->
-    <color name="colorSuspenso">#F44336</color> <!-- Rojo -->
-
+    <color name="colorAprobado">#4CAF50</color>
+    <color name="colorBoton">#E91E8E</color>
 </resources>

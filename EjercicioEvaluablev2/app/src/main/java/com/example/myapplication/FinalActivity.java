@@ -60,15 +60,13 @@ public class FinalActivity extends AppCompatActivity {
 
 
         if (notaFinal >= 5) {
-            tvResultado.setText("¡Felicidades, " + nombreUsuario + "! ¡APROBADO!");
+            tvResultado.setText(nombreUsuario + " APROBADO");
             ivResultado.setImageResource(R.drawable.ok);
-            tvNotaFinal.setText("Nota Final: " + notaFinal + " / 10");
-            tvNotaFinal.setTextColor(Color.parseColor("#4CAF50"));
+            tvNotaFinal.setText("Nota " + notaFinal + " / 10");
         } else {
-            tvResultado.setText("Lo siento, " + nombreUsuario + ". Has SUSPENDIDO.");
+            tvResultado.setText(nombreUsuario + ". SUSPENSO");
             ivResultado.setImageResource(R.drawable.caca);
-            tvNotaFinal.setText("Nota Final: " + notaFinal + " / 10");
-            tvNotaFinal.setTextColor(Color.parseColor("#F44336"));
+            tvNotaFinal.setText("Nota " + notaFinal + " / 10");
         }
 
         btnVolver.setOnClickListener(v -> {
@@ -102,13 +100,11 @@ public class FinalActivity extends AppCompatActivity {
 
 
             if (topCount == 0) {
-                tvEntry.setTextColor(Color.parseColor("#FFD700"));
                 tvEntry.setTypeface(null, Typeface.BOLD);
                 tvEntry.setTextSize(20);
             }
 
             else if (resultado.nombre.equals(nombreJugadorActual)) {
-                tvEntry.setTextColor(Color.parseColor("#1E88E5"));
                 tvEntry.setTypeface(null, Typeface.BOLD);
             }
 

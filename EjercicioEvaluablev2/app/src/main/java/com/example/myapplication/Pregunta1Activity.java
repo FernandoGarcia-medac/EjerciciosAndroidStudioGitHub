@@ -48,6 +48,7 @@ public class Pregunta1Activity extends AppCompatActivity {
                 int selectedId = rgRespuestas.getCheckedRadioButtonId();
 
                 if (selectedId == -1) {
+                    Toast.makeText(Pregunta1Activity.this, "Selecciona una respuesta", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

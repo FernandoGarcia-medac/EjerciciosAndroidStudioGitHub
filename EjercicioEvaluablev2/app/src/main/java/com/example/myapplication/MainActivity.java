@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
                 String nombreUsuario = et_nombre_usuario.getText().toString().trim();
 
                 if (nombreUsuario.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Introduce tu nombre para comenzar.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Introduce tu nombre", Toast.LENGTH_SHORT).show();
                 } else {
                     iniciarQuiz(nombreUsuario);
                 }
